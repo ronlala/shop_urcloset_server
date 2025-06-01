@@ -1,11 +1,16 @@
+//entrypoingt requirement
+require("dotenv").config();
+require("./config/connection");
+
+
 const express = require("express");
 const app = express();
 // const for clothingRoutes 
 
+const clothRoutes = require("./routes/clothRoutes.js");
 
 
-
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 // require the following dependencies 
 const morgan = require("morgan");
 const helmet = require("helmet");
