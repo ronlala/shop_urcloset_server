@@ -23,8 +23,6 @@ const getAllClothing = async (req,res,next) => {
 const getClothing = async(req,res,next) => {
     const {_id} = req.param;
     try{
-        // const Closet = ClosetLibrary.find(ClosetLibrary =>
-        //     ClosetInventory._id ===Number( _id));
            
         if(!_id){
             throw new Error("Id is required");
@@ -92,7 +90,6 @@ try{
     if  (!title||!author||!pages){
     throw new Error("Missing some Required information try again")
 }
-// fix this line here to reflect your project
     const updateClothing = await Closet.findByIDAndUpdate(
         _id,
         {
@@ -111,8 +108,7 @@ try{
     },
     {new: true}
 );
-    // const Closet = ClosetData.find((Closet) => Closet._id === _id);
-    // ClosetData[foundClosetIndex] = newCloset;
+  
     if (!updatedClothing){
         throw new Error("Clothing Item not found");
     }
@@ -127,7 +123,7 @@ try{
 
 }
 };
-
+//Delete clothing controller
 const deleteClothing = async (req,res,next) => {
     
     const{_id} = req.params;
