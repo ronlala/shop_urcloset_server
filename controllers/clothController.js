@@ -1,5 +1,5 @@
 const { get } = require("mongoose");
-const Book = require("../models/closetModel");
+const Closet = require("../models/closetModel");
 
 
 // Get all clothing that was 
@@ -7,11 +7,11 @@ const Book = require("../models/closetModel");
 const getAllClothing = async (req,res,next) => {
   
     try{
-        const books = await Book.find({});
+        const Closet = await Closet.find({});
     return res.status(200).json({
       success:{
-      Message:"This Route points to all books"},
-      data:{books},
+      Message:"This Route points to all Closet"},
+      data:{Closet},
       statusCode: 200,
   });
 } catch (error){
@@ -23,21 +23,21 @@ const getAllClothing = async (req,res,next) => {
 const getClothing = async(req,res,next) => {
     const {_id} = req.param;
     try{
-        // const books = booksLibrary.find(booksLibrary =>
-        //     bookInventory._id ===Number( _id));
+        // const Closet = ClosetLibrary.find(ClosetLibrary =>
+        //     ClosetInventory._id ===Number( _id));
            
         if(!_id){
             throw new Error("Id is required");
         }
-        const book = book.findbyID(_id)
-        if (!book) {
+        const closet = closet.findbyID(_id)
+        if (!closet) {
             throw new Error("Cloting not found");
         
         }
         
         return res.status(200).json({
                 success:{message: "found Item"},
-                data: {book},
+                data: {Closet},
             });
         } catch (error){
         
@@ -56,22 +56,25 @@ if  (!title||!author||!pages){
     throw new Error("Missing some Required information try again")
 }
 
- const newClothing = new Book({
-   title,
-   author,
-   publisher,
-   genre,
-   pages,
-   rating,
-   synopsis,
-   image
+ const newClothing = new Closet({
+        brand,
+        type,
+        required,
+        trim,
+        color,
+        publisher,
+        size,
+        category,
+        purchdate ,
+        price,
+        image,
 });
 await newClothing.save()
 
 
     return res.status(201).json({
-        success:{message: "New book has been added to the Libray "},
-        data: {newBook},
+        success:{message: "New Clothing has been added to the Closet "},
+        data: {newClothing},
     })
 } catch (error){
     return next (error)
@@ -90,29 +93,32 @@ try{
     throw new Error("Missing some Required information try again")
 }
 // fix this line here to reflect your project
-    const updateClothing = await Book.findByIDAndUpdate(
+    const updateClothing = await Closet.findByIDAndUpdate(
         _id,
         {
-        $set:{title,
-        author,
+        $set:{brand,
+        type,
+        required,
+        trim,
+        color,
         publisher,
-        genre,
-        pages,
-        rating,
-        synopsis,
-        image
+        size,
+        category,
+        purchdate ,
+        price,
+        image,
       }
     },
     {new: true}
 );
-    // const book = booksData.find((book) => book._id === _id);
-    // booksData[foundBookIndex] = newBook;
+    // const Closet = ClosetData.find((Closet) => Closet._id === _id);
+    // ClosetData[foundClosetIndex] = newCloset;
     if (!updatedClothing){
         throw new Error("Clothing Item not found");
     }
     return res.status(201).json({
         success:{message: "Something New Added to your closet"},
-        data: {updatedBook},
+        data: {updatedClothing},
         statusCode: 201
     });
 } catch (error){
@@ -129,13 +135,13 @@ const deleteClothing = async (req,res,next) => {
     
     try {
     if (!_id){
-        throw new Error("Book not found id needed");
+        throw new Error("Clothing Item not found");
     }
-        // const removeBook =books.filter((book) => book._id !== _id);
-        // console.log(removeBook)
-     await Book.findByIDAndDelete(_id);
+       
+       
+     await Closet.findByIDAndDelete(_id);
         return res.status(200).json({
-        success: { message: " Book has been deleted from the library"},
+        success: { message: "Item has been deleted from your closet"},
         });
     } catch (error) {
   

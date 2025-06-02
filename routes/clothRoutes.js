@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 
-const { getAllClothing, getClothing,createClothing,updateClothing,deleteClothing} = require("../controllers/bookController");
+const { getAllClothing, getClothing,createClothing,updateClothing,deleteClothing} = require("../controllers/clothController");
 
 router.get("/", getAllClothing);
 
