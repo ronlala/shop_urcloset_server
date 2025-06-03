@@ -1,18 +1,16 @@
 const mongoose = require("mongoose"); 
 
-const {schema} = mongoose;
+
+const {Schema} = mongoose;
+
 //Edit all of the schema to add all of your clothing data here
-const bookSchema = new Schema({
+const closetSchema = new Schema({
     brand: {
         type:String,
         required: true,
         trim: true, },
     color:{
         type: String,
-        required: true,
-        trim: true},
-    publisher:{
-        type:String,
         required: true,
         trim: true},
     size: {
@@ -34,6 +32,6 @@ const bookSchema = new Schema({
         trim: true,}
 });
 
-const Closet = mongoose.model("Closet, closetSchema");
+const Closet = mongoose.model("Closet", closetSchema);
 
-module.exports= Closet;
+module.exports = Closet;
