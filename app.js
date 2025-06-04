@@ -3,6 +3,7 @@ require("dotenv").config();
 require("./config/connection");
 
 
+
 const express = require("express");
 const app = express();
 // const for clothingRoutes 
@@ -10,7 +11,8 @@ const app = express();
 const clothRoutes = require("./routes/clothRoutes.js");
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT 
+
 // require the following dependencies 
 const morgan = require("morgan");
 const helmet = require("helmet");
@@ -23,7 +25,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use (express.json());
 app.use(express.urlencoded({extended:true}));
-
+ 
 
 
     app.listen(PORT,() =>{

@@ -56,11 +56,7 @@ if  (!title||!author||!pages){
 
  const newClothing = new Closet({
         brand,
-        type,
-        required,
-        trim,
         color,
-        publisher,
         size,
         category,
         purchdate ,
@@ -94,11 +90,7 @@ try{
         _id,
         {
         $set:{brand,
-        type,
-        required,
-        trim,
         color,
-        publisher,
         size,
         category,
         purchdate ,
