@@ -1,0 +1,3 @@
+
+
+mongoimport --uri mongodb+srv://larondachairse:yPz0QzpIcs9Kolig@closet1.xspkhz7.mongodb.net/shopurcloset --collection closet --type json --file closet.json
