@@ -1,3 +1,6 @@
+const passport = require("passport");
+const bcrypt = require("bcrypt");
+
 const User = require("../models/userModel");
 
 const localLogin = async (req, res , next) => {
