@@ -18,7 +18,7 @@ const path = require ("node:path");
 // const for clothingRoutes 
 
 const clothRoutes = require("./routes/clothRoutes.js");
-const authRouter = require("./routes/authRouter.js");
+
 const PORT = process.env.PORT || 8080
 
 //middleware section 
@@ -29,6 +29,7 @@ app.use(helmet());
 app.use (express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname+"/public")));
+app.use("/api/books",clothRoutes);
 
 
 //initialize passport ... routes after this
