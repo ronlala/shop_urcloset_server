@@ -37,6 +37,22 @@ app.use(passport.session());
 app.use("/api/closet",clothRoutes);
 app.use("/auth", authRoutes); 
 
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SECRET_KEY,
+
+    cookie: {
+      httpOnly: true,
+      secure: false, 
+      maxAge: 1000 * 60 * 60 * 24, 
+    },
+  })
+);
+
+
+
 app.get("/",(req,res,next) => {
   res.status( 200).json({
     success:{ message: "You did that" },
