@@ -29,7 +29,7 @@ app.use(helmet());
 app.use (express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname+"/public")));
-app.use("/api/books",clothRoutes);
+app.use("/api/closet",clothRoutes);
 
 
 //initialize passport ... routes after this
