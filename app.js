@@ -31,6 +31,14 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname+"/public")));
 app.use("/api/closet",clothRoutes);
 
+app.get("/",(req,res,next) => {
+  res.status( 200).json({
+    success:{ message: "You did that" },
+    statusCode:(200),
+
+});
+})
+
 
 //initialize passport ... routes after this
  
