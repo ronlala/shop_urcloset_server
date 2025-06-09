@@ -18,6 +18,7 @@ const path = require ("node:path");
 // const for clothingRoutes 
 
 const clothRoutes = require("./routes/clothRoutes.js");
+const authRoutes = require("./routes/authRouter.js");
 
 const PORT = process.env.PORT || 8080
 
@@ -26,10 +27,15 @@ const PORT = process.env.PORT || 8080
 app.use(cors({credentials: true, origin: true}));
 app.use(morgan("dev"));
 app.use(helmet());
+
 app.use (express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname+"/public")));
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use("/api/closet",clothRoutes);
+app.use("/auth", authRoutes); 
 
 app.get("/",(req,res,next) => {
   res.status( 200).json({
@@ -42,7 +48,7 @@ app.get("/",(req,res,next) => {
 
 //initialize passport ... routes after this
  
-// error handeling 
+// error handeling gi
 
 
 app.use((err,req,res,next) =>{
@@ -59,6 +65,6 @@ app.use((err,req,res,next) =>{
 });
 // Port listen 
 app.listen(PORT,() =>{
-      console.log(`Server is listening on port ${PORT},Connection has been established`);
-      console.log(`http://localhost:${PORT}/`)
+      // console.log(`Server is listening on port ${PORT},Connection has been established`);
+      // console.log(`http://localhost:${PORT}/`)
     });
