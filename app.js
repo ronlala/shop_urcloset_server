@@ -3,10 +3,12 @@ require("dotenv").config();
 require("./config/connection");
 require("./config/autherizerStragey.js");
 
+const express = require("express");
+
+
 const session = require("express-session");
 const passport = require("passport");
 
-const express = require("express");
 const app = express();
 
 
@@ -31,10 +33,31 @@ app.use(helmet());
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use(express.static(path.join(__dirname+"/public")));
+app.use(express.static(path.join(__dirname , "public")));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SECRET_KEY,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+  })
+);
+
+
+// // app.use(require('express-session')({ 
+// //   secret: process.env.SECRET_KEY,
+//   resave: true,
+//  saveUninitialized: true
+//  }));
 
 app.use("/api/closet",clothRoutes);
 app.use("/auth", authRoutes); 
