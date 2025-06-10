@@ -16,6 +16,7 @@ const cors = require("cors");
 const path = require ("node:path");
 
 // const for clothingRoutes 
+// 
 
 const clothRoutes = require("./routes/clothRoutes.js");
 const authRoutes = require("./routes/authRouter.js");
