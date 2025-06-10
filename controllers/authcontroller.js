@@ -3,41 +3,23 @@ const bcrypt = require("bcrypt");
 
 const User = require("../models/userModel");
 
-const localLogin = async (req, res , next) => {
-
-   passport.authenticate("local",(err,user,info) => {
-    if(err){
-        return next(err);
-    }
-
-    if (!user){
-        return res.status(401).json({
-            error:{message:"No user detected try again."},
-        });
-    }
-    req.login(user, (err) =>{
-        if (err){
-            return next(err)
-        }
- const userCopy ={...req.user._doc};
- userCopy.password = undefined;
-
- console.log(userCopy);
-
- res.status(200).json({
-    success: {message: "Success...withing local authentication"},
-    data:{user: userCopy},
-    statusCode: 200,
- });
-})
-})
-};
 
 const register = async (req, res, next) => {
     const {firstName, lastName, username, password} = request.body;
     console.log(request.body);
+  if (error){
+    return next(error);
+  } else if (!firstName || !username || !password){
+    return response.status(400).json({
+        error: {message: "You are missing stuff."},
+        statusCode: 400,
+    });
+}
     
 try{
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
     const newUser={
         firstName: firstName,
         lastName: lastName,
@@ -50,32 +32,59 @@ await newUser.save();
 
 req.login(newUser, (error) =>{
   if (error){
-    return next(eror);
+    return next(error);
   }
   newUser.password = undefined;
 
   return res.status(201).json({
     success:{message: "New User is created"},
     data:{newUser},
-    sttusCode: 201,
+    statusCode: 201,
 
 });
 })
 } catch(error) {
-    return res.status(500).json({
-        error: {message: "Internal Server error"},
-        statusCode:500,
+    return next(error)
+    };
+}
+const login = async(req , res, next) => {
+    res.status(200).json({
+        success:{message: "user"},
     });
 }
+const localLogin = async (req, res, next) => {
+
+    passport.authenticate("local", (err,user,info) =>{
+        if (error) {
+            return next(error);
+        }
+        if (!user) {
+            return res.status(401).json({
+                error: {message: " There is not a user detected. Please try again"},
+            });
+        }
+        req.login(user, (err) => {
+            if (error) {
+                return next (error)
+            }
+ response.status(200).json({
+                success: { message: "Login successful within local authentication feature." },
+                statusCode: 200,
+            });
+        })
+  })
+
+  
 };
+
 const logout = async(req, res,next) => {
- req.logout((err) => {
-    if (err){
-        return next(err);
+ req.logout((error) => {
+    if (error){
+        return next(error);
     }
-    req.session.destroy((err) =>{
+    req.session.destroy((error) => {
         if (err){
-            return next(err);
+            return next(error);
         }
     })
     res.clearCookie("connect.sid");
@@ -85,3 +94,4 @@ const logout = async(req, res,next) => {
     });
 })
 };     
+module.exports = {register, login, logout, localLogin};
