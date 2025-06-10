@@ -1,10 +1,11 @@
 const mongoose = require("mongoose"); 
 
 
-const {Schema} = mongoose;
+// const {Schema} = mongoose;
 
 //Edit all of the schema to add all of your clothing data here
-const closetSchema = new Schema({
+
+const ClosetSchema = new mongoose.Schema({
     brand: {
         type:String,
         required: true,
@@ -21,7 +22,7 @@ const closetSchema = new Schema({
         type: String,
         required: true,},
     purchdate :{
-        type: Date,
+        type: Number,
         required: true,},
     price: {
         type: Number,
@@ -32,6 +33,6 @@ const closetSchema = new Schema({
         trim: true,}
 });
 
-const Closet = mongoose.model("Closet", closetSchema);
+const Closet = mongoose.model("Closet", ClosetSchema);
 
 module.exports = Closet;

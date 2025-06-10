@@ -1,7 +1,7 @@
 //entrypoingt requirement
 require("dotenv").config();
 require("./config/connection");
-require("./config/autherizerStragey.js");
+// require("./config/autherizerStragey.js");
 
 const express = require("express");
 
@@ -21,7 +21,7 @@ const path = require ("node:path");
 // n
 
 const clothRoutes = require("./routes/clothRoutes.js");
-const authRoutes = require("./routes/authRouter.js");
+// const authRoutes = require("./routes/authRouter.js");
 
 const PORT = process.env.PORT || 8080
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname , "public")));
 
 
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 app.use(
   session({
@@ -60,7 +60,7 @@ app.use(
 //  }));
 
 app.use("/api/closet",clothRoutes);
-app.use("/auth", authRoutes); 
+// app.use("/auth", authRoutes); 
 
 app.use(
   session({
@@ -89,7 +89,7 @@ app.get("/",(req,res,next) => {
 
 //initialize passport ... routes after this
  
-// error handeling gi
+
 
 
 app.use((err,req,res,next) =>{
@@ -106,6 +106,6 @@ app.use((err,req,res,next) =>{
 });
 // Port listen 
 app.listen(PORT,() =>{
-      // console.log(`Server is listening on port ${PORT},Connection has been established`);
-      // console.log(`http://localhost:${PORT}/`)
+    console.log(`Server is listening on port ${PORT},Connection has been established`);
+     console.log(`http://localhost:${PORT}/`)
     });

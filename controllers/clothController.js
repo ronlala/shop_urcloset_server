@@ -1,4 +1,3 @@
-const { get } = require("mongoose");
 const Closet = require("../models/closetModel");
 
 
@@ -7,11 +6,13 @@ const Closet = require("../models/closetModel");
 const getAllClothing = async (req,res,next) => {
   
     try{
-        const Closet = await Closet.find({});
-    return res.status(200).json({
+        
+    const wardrobe = await Closet.find({});
+    
+        return res.status(200).json({
       success:{
       Message:"This Route points to all Closet"},
-      data:{Closet},
+      data:{wardrobe},
       statusCode: 200,
   });
 } catch (error){
@@ -45,12 +46,18 @@ const getClothing = async(req,res,next) => {
 // Create new clothing item
 
 const createClothing = async(req,res,next) => {
-    const {title , author, publisher,  genre, pages, rating, synopsis, image} = req.body;
+    const {brand,
+        color,
+        size,
+        category,
+        purchdate ,
+        price,
+        image,} = req.body;
 
 
 
 try{
-if  (!title||!author||!pages){
+if  (!brand||!color||!size){
     throw new Error("Missing some Required information try again")
 }
 
@@ -78,12 +85,18 @@ await newClothing.save()
 //update clothing controller
 const updateClothing = async(req,res,next) => {
     const{id} = req.params;
-    const {title , author, publisher,  genre, pages, rating, synopsis, image} = req.body;
+    const {brand,
+        color,
+        size,
+        category,
+        purchdate ,
+        price,
+        image,} = req.body;
 
 
 try{
-
-    if  (!title||!author||!pages){
+// fix the if statement
+    if  (!brand||!color||!size){
     throw new Error("Missing some Required information try again")
 }
     const updateClothing = await Closet.findByIDAndUpdate(
