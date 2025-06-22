@@ -22,7 +22,7 @@ const ClosetSchema = new mongoose.Schema({
         type: String,
         required: true,},
     purchdate :{
-        type: Number,
+        type: Date,
         required: true,},
     price: {
         type: Number,
