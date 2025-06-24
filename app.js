@@ -1,10 +1,13 @@
 //entrypoingt requirement
 require("dotenv").config();
 require("./config/connection");
-// require("./config/autherizerStragey.js");
+require("./config/autherizerStragey.js");
 
 const express = require("express");
-
+const morgan = require("morgan");
+const helmet = require("helmet");
+const cors = require("cors");
+const path = require ("node:path");
 
 const session = require("express-session");
 const passport = require("passport");
@@ -12,16 +15,13 @@ const passport = require("passport");
 const app = express();
 
 
-const morgan = require("morgan");
-const helmet = require("helmet");
-const cors = require("cors");
-const path = require ("node:path");
+
 
 // const for clothingRoutes 
-// n
+
 
 const clothRoutes = require("./routes/clothRoutes.js");
-// const authRoutes = require("./routes/authRouter.js");
+const authRoutes = require("./routes/authRouter.js");
 
 const PORT = process.env.PORT || 8080
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname , "public")));
 
 
 app.use(passport.initialize());
-// app.use(passport.session());
+
 
 app.use(
   session({
@@ -51,16 +51,16 @@ app.use(
     },
   })
 );
+app.use(passport.session());
 
-
-// // app.use(require('express-session')({ 
-// //   secret: process.env.SECRET_KEY,
-//   resave: true,
-//  saveUninitialized: true
-//  }));
+app.use(require('express-session')({ 
+  secret: process.env.SECRET_KEY,
+  resave: true,
+  saveUninitialized: true
+ }));
 
 app.use("/api/closet",clothRoutes);
-// app.use("/auth", authRoutes); 
+app.use("/auth", authRoutes); 
 
 app.use(
   session({

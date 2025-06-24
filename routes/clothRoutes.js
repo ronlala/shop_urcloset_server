@@ -10,9 +10,9 @@ router.get("/", getAllClothing);
 
   router.post("/create/new", createClothing);
 
-  router.put("/update/:id", updateClothing);
+  router.put("/update/:_id", updateClothing);
   
-  router.delete("/delete/:id", deleteClothing);
+  router.delete("/delete/:_id", deleteClothing);
   
  
 
