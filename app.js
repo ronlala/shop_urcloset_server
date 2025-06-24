@@ -17,7 +17,6 @@ const app = express();
 
 
 
-// const for clothingRoutes 
 
 
 const clothRoutes = require("./routes/clothRoutes.js");
