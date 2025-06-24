@@ -6,13 +6,13 @@ const { getAllClothing, getClothing,createClothing,updateClothing,deleteClothing
 
 router.get("/", getAllClothing);
 
-  router.get("/:_id", getClothing);
+  router.get("/:id", getClothing);
 
   router.post("/create/new", createClothing);
 
-  router.put("/update/:_id", updateClothing);
+  router.put("/update/:id", updateClothing);
   
-  router.delete("/delete/:_id", deleteClothing);
+  router.delete("/delete/:id", deleteClothing);
   
  
 
