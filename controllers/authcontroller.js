@@ -99,4 +99,4 @@ const logout = async(req, res,next) => {
     });
 })
 };     
-module.exports = {register, login, logout, localLogin};
+module.exports = {register, login, logout, localLogin}; // adding commits 
