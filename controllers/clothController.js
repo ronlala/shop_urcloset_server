@@ -24,13 +24,13 @@ const getAllClothing = async (req,res,next) => {
 //get one clothing item
 
 const getClothing = async(req,res,next) => {
-    const {_id} = req.params;
+    const {id} = req.params;
     try{
         // const cloth = clothingInventory.find(clothingInventory => clothingInventory._id === _id);
-        if(!_id){
+        if(!id){
             throw new Error("Id is required");
         }
-        const closetItem = await Closet.findById(_id)
+        const closetItem = await Closet.findById(id)
         if (!closetItem) {
             throw new Error("Cloting not found");
         
