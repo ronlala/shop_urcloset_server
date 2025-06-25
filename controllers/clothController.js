@@ -20,29 +20,34 @@ const getAllClothing = async (req,res,next) => {
     return next(error)
 }
 };
-// Get clothing Item by ID
+
+//get one clothing item
+
 const getClothing = async(req,res,next) => {
-    const {_id} = req.param;
+    const {id} = req.params;
     try{
-           
-        if(!_id){
+        // const cloth = clothingInventory.find(clothingInventory => clothingInventory._id === _id);
+        if(!id){
             throw new Error("Id is required");
         }
-        const closet = closet.findbyID(_id)
-        if (!closet) {
+        const closetItem = await Closet.findById(id)
+        if (!closetItem) {
             throw new Error("Cloting not found");
         
         }
         
         return res.status(200).json({
                 success:{message: "found Item"},
-                data: {Closet},
+                data: {closetItem},
             });
         } catch (error){
         
         return next(error)
         }
     };
+
+
+
 // Create new clothing item
 
 const createClothing = async(req,res,next) => {
@@ -99,7 +104,7 @@ try{
     if  (!brand||!color||!size){
     throw new Error("Missing some Required information try again")
 }
-    const updateClothing = await Closet.findByIDAndUpdate(
+    const updateClothing = await Closet.findByIdAndUpdate(
         _id,
         {
         $set:{brand,
@@ -140,7 +145,7 @@ const deleteClothing = async (req,res,next) => {
     }
        
        
-     await Closet.findByIDAndDelete(_id);
+     await Closet.findByIdAndDelete(_id);
         return res.status(200).json({
         success: { message: "Item has been deleted from your closet"},
         });
