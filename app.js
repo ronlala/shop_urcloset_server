@@ -17,9 +17,7 @@ const app = express();
 
 
 
-// const for clothingRoutes 
-
-
+// const for clothingRoutes
 const clothRoutes = require("./routes/clothRoutes.js");
 const authRoutes = require("./routes/authRouter.js");
 
